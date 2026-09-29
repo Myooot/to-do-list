@@ -1,0 +1,13 @@
+.confirm-box {
+    max-width: 620px;
+    padding: 22px;
+}
+
+.confirm-box h2 {
+    margin: 0 0 8px;
+}
+
+.confirm-box p {
+    margin: 0 0 20px;
+    color: var(--muted);
+}
