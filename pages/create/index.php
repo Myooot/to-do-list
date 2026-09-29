@@ -40,7 +40,7 @@ ob_start();
 </section>
 
 <section class="panel">
-    <form class="form" method="post">
+    <form class="form" method="post" novalidate data-task-form data-disable-on-submit>
         <?php if ($errors !== []): ?>
             <ul class="error-list">
                 <?php foreach ($errors as $error): ?>
@@ -51,12 +51,14 @@ ob_start();
 
         <div class="field">
             <label for="title">Title</label>
-            <input id="title" name="title" type="text" value="<?= e($form['title']) ?>" required>
+            <input id="title" name="title" type="text" value="<?= e($form['title']) ?>" maxlength="120" autocomplete="off" aria-describedby="title-hint title-error" aria-invalid="<?= $errors !== [] && $form['title'] === '' ? 'true' : 'false' ?>" required autofocus>
+            <p class="field__hint" id="title-hint">Keep it short and specific.</p>
+            <p class="field__error" id="title-error" <?= $errors !== [] && $form['title'] === '' ? '' : 'hidden' ?>>Please enter a task title.</p>
         </div>
 
         <div class="field">
             <label for="description">Description</label>
-            <textarea id="description" name="description"><?= e($form['description']) ?></textarea>
+            <textarea id="description" name="description" maxlength="1000" placeholder="Add any helpful details (optional)"><?= e($form['description']) ?></textarea>
         </div>
 
         <div class="field">
@@ -71,7 +73,7 @@ ob_start();
         </div>
 
         <div class="actions">
-            <button class="button button--primary" type="submit">Save Task</button>
+            <button class="button button--primary" type="submit" data-loading-text="Adding task…">Add Task</button>
             <a class="button button--quiet" href="<?= e(base_url('pages/tasks/')) ?>">Cancel</a>
         </div>
     </form>

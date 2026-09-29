@@ -14,6 +14,7 @@ function render_page(string $title, string $content, ?string $pageCss = null): v
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#4f46e5">
         <title><?= e($title) ?> | To-Do List</title>
         <link rel="stylesheet" href="<?= e(base_url('style.css')) ?>">
         <?php if ($pageCss !== null): ?>
@@ -24,17 +25,24 @@ function render_page(string $title, string $content, ?string $pageCss = null): v
     <body>
         <header class="site-header">
             <div class="site-header__inner">
-                <a class="brand" href="<?= e(base_url('pages/tasks/')) ?>">To-Do List</a>
+                <a class="brand" href="<?= e(base_url('pages/tasks/')) ?>" aria-label="To-Do List home">
+                    <span class="brand__mark" aria-hidden="true">✓</span>
+                    <span>To-Do List</span>
+                </a>
                 <nav class="nav" aria-label="Main navigation">
                     <a href="<?= e(base_url('pages/tasks/')) ?>">Tasks</a>
-                    <a href="<?= e(base_url('pages/create/')) ?>">Add Task</a>
+                    <a class="nav__primary" href="<?= e(base_url('pages/create/')) ?>"><span aria-hidden="true">+</span> Add Task</a>
                 </nav>
             </div>
         </header>
 
         <main class="page">
             <?php if ($flash !== null): ?>
-                <div class="notice"><?= e($flash) ?></div>
+                <div class="notice" role="status" aria-live="polite">
+                    <span class="notice__icon" aria-hidden="true">✓</span>
+                    <span><?= e($flash) ?></span>
+                    <button class="notice__close" type="button" aria-label="Dismiss notification">×</button>
+                </div>
             <?php endif; ?>
             <?= $content ?>
         </main>
@@ -42,6 +50,7 @@ function render_page(string $title, string $content, ?string $pageCss = null): v
         <footer class="site-footer">
             To-Do List by Corpuz & Remorosa.
         </footer>
+        <script src="<?= e(base_url('app.js')) ?>" defer></script>
     </body>
 
     </html>

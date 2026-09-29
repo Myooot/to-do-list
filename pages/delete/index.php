@@ -30,11 +30,12 @@ ob_start();
 </section>
 
 <section class="panel confirm-box">
+    <div class="confirm-box__icon" aria-hidden="true">!</div>
     <h2><?= e($task['title']) ?></h2>
-    <p>This action cannot be undone.</p>
-    <form class="actions" method="post">
-        <button class="button button--danger" type="submit">Delete Task</button>
+    <p>Are you sure you want to delete this task? This action cannot be undone.</p>
+    <form class="actions" method="post" data-disable-on-submit>
         <a class="button button--quiet" href="<?= e(base_url('pages/view/?id=' . urlencode($id))) ?>">Cancel</a>
+        <button class="button button--danger" type="submit" data-loading-text="Deleting…">Delete Task</button>
     </form>
 </section>
 <?php

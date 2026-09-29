@@ -1,13 +1,5 @@
-.confirm-box {
-    max-width: 620px;
-    padding: 22px;
-}
-
-.confirm-box h2 {
-    margin: 0 0 8px;
-}
-
-.confirm-box p {
-    margin: 0 0 20px;
-    color: var(--muted);
-}
+.confirm-box { max-width: 620px; padding: clamp(24px, 5vw, 34px); text-align: center; }
+.confirm-box__icon { display: grid; width: 52px; height: 52px; margin: 0 auto 16px; place-items: center; border-radius: 50%; background: var(--danger-soft); color: var(--danger); font-size: 1.35rem; font-weight: 850; }
+.confirm-box h2 { overflow-wrap: anywhere; margin: 0 0 8px; font-size: 1.3rem; }
+.confirm-box p { max-width: 440px; margin: 0 auto 24px; color: var(--muted); }
+.confirm-box .actions { justify-content: center; }

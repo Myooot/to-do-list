@@ -17,7 +17,7 @@ ob_start();
 <section class="page-title">
     <div>
         <h1><?= e($task['title']) ?></h1>
-        <p>Created on <?= e($task['created_at'] ?? 'Unknown date') ?></p>
+        <p>Created <?= e($task['created_at'] ?? 'on an unknown date') ?></p>
     </div>
     <a class="button" href="<?= e(base_url('pages/tasks/')) ?>">Back</a>
 </section>
@@ -26,7 +26,7 @@ ob_start();
     <dl>
         <div>
             <dt>Status</dt>
-            <dd><?= e(task_status_label($task['status'])) ?></dd>
+            <dd><span class="detail__status detail__status--<?= e($task['status']) ?>"><?= e(task_status_label($task['status'])) ?></span></dd>
         </div>
         <div>
             <dt>Description</dt>
@@ -34,7 +34,7 @@ ob_start();
         </div>
     </dl>
     <div class="actions">
-        <a class="button" href="<?= e(base_url('pages/edit/?id=' . urlencode($task['id']))) ?>">Edit</a>
+        <a class="button button--primary" href="<?= e(base_url('pages/edit/?id=' . urlencode($task['id']))) ?>">Edit Task</a>
         <a class="button button--danger" href="<?= e(base_url('pages/delete/?id=' . urlencode($task['id']))) ?>">Delete</a>
     </div>
 </section>

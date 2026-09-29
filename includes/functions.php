@@ -46,7 +46,7 @@ function save_tasks(array $tasks): void
         mkdir($dir, 0777, true);
     }
 
-    file_put_contents(DATA_FILE, json_encode(array_values($tasks), JSON_PRETTY_PRINT));
+    file_put_contents(DATA_FILE, json_encode(array_values($tasks), JSON_PRETTY_PRINT), LOCK_EX);
 }
 
 function find_task(string $id): ?array
