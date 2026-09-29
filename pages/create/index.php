@@ -14,6 +14,10 @@ $form = [
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     [$errors, $form] = validate_task($_POST);
 
+    if (!csrf_token_is_valid($_POST['csrf_token'] ?? null)) {
+        $errors[] = 'Your session expired. Please try again.';
+    }
+
     if ($errors === []) {
         $tasks = read_tasks();
         $tasks[] = [
@@ -41,6 +45,8 @@ ob_start();
 
 <section class="panel">
     <form class="form" method="post">
+        <?= csrf_field() ?>
+
         <?php if ($errors !== []): ?>
             <ul class="error-list">
                 <?php foreach ($errors as $error): ?>
@@ -51,12 +57,14 @@ ob_start();
 
         <div class="field">
             <label for="title">Title</label>
-            <input id="title" name="title" type="text" value="<?= e($form['title']) ?>" required>
+            <input id="title" name="title" type="text" value="<?= e($form['title']) ?>" maxlength="<?= TASK_TITLE_MAX_LENGTH ?>" data-max-length="<?= TASK_TITLE_MAX_LENGTH ?>" aria-describedby="title-hint" required>
+            <p class="field-hint" id="title-hint">0 / <?= TASK_TITLE_MAX_LENGTH ?> characters</p>
         </div>
 
         <div class="field">
             <label for="description">Description</label>
-            <textarea id="description" name="description"><?= e($form['description']) ?></textarea>
+            <textarea id="description" name="description" maxlength="<?= TASK_DESCRIPTION_MAX_LENGTH ?>" data-max-length="<?= TASK_DESCRIPTION_MAX_LENGTH ?>" aria-describedby="description-hint"><?= e($form['description']) ?></textarea>
+            <p class="field-hint" id="description-hint">0 / <?= TASK_DESCRIPTION_MAX_LENGTH ?> characters</p>
         </div>
 
         <div class="field">

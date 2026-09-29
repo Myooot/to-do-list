@@ -32,6 +32,12 @@ ob_start();
             <dt>Description</dt>
             <dd><?= e($task['description'] !== '' ? $task['description'] : 'No description added.') ?></dd>
         </div>
+        <?php if (($task['updated_at'] ?? '') !== ''): ?>
+            <div>
+                <dt>Updated</dt>
+                <dd><?= e($task['updated_at']) ?></dd>
+            </div>
+        <?php endif; ?>
     </dl>
     <div class="actions">
         <a class="button" href="<?= e(base_url('pages/edit/?id=' . urlencode($task['id']))) ?>">Edit</a>

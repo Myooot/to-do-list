@@ -42,6 +42,7 @@ function render_page(string $title, string $content, ?string $pageCss = null): v
         <footer class="site-footer">
             To-Do List by Corpuz & Remorosa.
         </footer>
+        <script src="<?= e(base_url('script.js')) ?>"></script>
     </body>
 
     </html>

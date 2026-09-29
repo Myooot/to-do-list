@@ -165,6 +165,17 @@ a {
     font-weight: 700;
 }
 
+.field-hint {
+    margin: -2px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.field-hint--error {
+    color: var(--danger);
+    font-weight: 700;
+}
+
 .field input,
 .field textarea,
 .field select {
